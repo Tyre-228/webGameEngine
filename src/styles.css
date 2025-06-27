@@ -1,0 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: none;
+}
+#canvas {
+    display: block;
+    image-rendering: pixelated;
+}

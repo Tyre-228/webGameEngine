@@ -1,0 +1,1 @@
+All entities in the engine should contain physical shape and texture
