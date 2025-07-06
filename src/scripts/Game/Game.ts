@@ -5,6 +5,7 @@ import { objectToDrawType, IObjectsToDraw, objectToUpdateType } from "./GameType
 import { physicalObjectType } from "../helpers/GlobalTypes";
 import RectTexture from "../Textures/RectTexture/RectTexture";
 import Camera from "../Tools/Camera/Camera";
+import TileMap from "../Tools/TileMap/TileMap";
 
 class Game {
     // basic config
@@ -28,6 +29,7 @@ class Game {
     // entities
     player: Player
     camera: Camera
+    tileMap: TileMap
 
     constructor(screenWidth: number, screenHeight: number, fps: number) {
         this.screenWidth = screenWidth
@@ -58,32 +60,17 @@ class Game {
         // entities
         this.player = new Player(100, 100, 50, 75, this.GRAVITY_CONSTANT, 0.0001, this.screenHeight)
         this.camera = new Camera(this.ctx, this.screenWidth, this.screenHeight)
+        this.tileMap = new TileMap(16, -1000, -1000, 1000, 1000)
     }
 
     private config() {
         this.ctx.imageSmoothingEnabled = false
 
         // background
-        for(let i = -10;i < this.screenWidth/64;i++) {
-            for(let j = -10;j < this.screenWidth/64;j++) {
-                const texture = new StaticTexture("/src/assets/images/Map01/Map01.png", 64 * i, 64 * j, 64, 64, 16, 208, 16, 16)
-                this.objectsToDraw.background.push(texture)
-            }
-        }
+        this.objectsToDraw.background.push(this.tileMap)
 
         // foreground
-        for(let i = 0;i < 5;i++) {
-            const rect = new StaticObject(200 + 100 * i, 100, 10, 100, new RectTexture(200 + 100 * i, 100, 10, 100, "blue"))
 
-            this.objectsToDraw.foreground.push(rect)
-            this.physicalObjects.push(rect)
-        }
-
-        const rect = new StaticObject(800, 100, 200, 200, new RectTexture(800, 100, 200, 200, "red"))
-
-
-        this.objectsToDraw.foreground.push(rect)
-        this.physicalObjects.push(rect)
 
         this.objectsToDraw.foreground.push(this.player)
         this.objectsToUpdate.push(this.player)

@@ -8,7 +8,7 @@ class TileMap {
 
     constructor(tileSize: number, mapX: number, mapY: number, mapW: number, mapH: number) {
         this.tileSize = tileSize
-        this.rect = new Rectangle(mapX, mapY, mapW, mapH, "black")
+        this.rect = new Rectangle(mapX, mapY, mapW, mapH)
         this.tileMap = []
         this.tileValues = []
 
@@ -34,7 +34,7 @@ class TileMap {
         for(let i = 0;i < this.tileMap.length;i++) {
             for(let j = 0;j < this.tileMap[i].length;j++) {
                 if(this.tileMap[i][j] === "") {
-                    ctx.fillStyle = `white`
+                    ctx.fillStyle = `blue`
                     ctx.fillRect(i * this.tileSize, j * this.tileSize, this.tileSize, this.tileSize)
                 }
             }
